@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Food Ordering System 🍔</title>
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif;
+            background-color: #F8F0E3;
+            color: #2C3E50;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            padding: 20px;
+            font-size: 28px;
+            background-color: #f39c12;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px;
+        }
+        .item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            width: 150px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .item:hover {
+            transform: scale(1.05);
+        }
+        .item input {
+            margin-top: 10px;
+        }
+        button {
+            margin: 10px;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.2s;
+        }
+        .calc { background-color: #27AE60; }
+        .calc:hover { background-color: #229954; }
+        .reset { background-color: #E67E22; }
+        .reset:hover { background-color: #CA6F1E; }
+        .exit { background-color: #E74C3C; }
+        .exit:hover { background-color: #C0392B; }
+        .total {
+            font-size: 20px;
+            color: #8E44AD;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🍟 Fast Food Menu 🍕</h1>
+
+    <div class="menu">
+        <div class="item"><strong>Burger</strong><br>$5.00<br><input type="checkbox" value="5.0"></div>
+        <div class="item"><strong>Fries</strong><br>$2.50<br><input type="checkbox" value="2.5"></div>
+        <div class="item"><strong>Pizza</strong><br>$8.00<br><input type="checkbox" value="8.0"></div>
+        <div class="item"><strong>Sandwich</strong><br>$4.00<br><input type="checkbox" value="4.0"></div>
+        <div class="item"><strong>Soda</strong><br>$1.50<br><input type="checkbox" value="1.5"></div>
+        <div class="item"><strong>Ice Cream</strong><br>$2.00<br><input type="checkbox" value="2.0"></div>
+    </div>
+
+    <button class="calc" onclick="calculateTotal()">Calculate Total</button>
+    <button class="reset" onclick="resetOrder()">Reset</button>
+    <button class="exit" onclick="window.close()">Exit</button>
+
+    <div class="total" id="totalDisplay">Total: $0.00</div>
+
+    <script>
+        function calculateTotal() {
+            let checkboxes = document.querySelectorAll('.menu input[type="checkbox"]');
+            let total = 0;
+            checkboxes.forEach(cb => {
+                if (cb.checked) total += parseFloat(cb.value);
+            });
+            document.getElementById('totalDisplay').textContent = `Total: $${total.toFixed(2)}`;
+            if (total === 0) {
+                alert("Please select at least one item.");
+            }
+        }
+
+        function resetOrder() {
+            let checkboxes = document.querySelectorAll('.menu input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = false);
+            document.getElementById('totalDisplay').textContent = "Total: $0.00";
+        }
+    </script>
+
+</body>
+</html>
